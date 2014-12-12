@@ -1,0 +1,18 @@
+.card{
+	margin: 10px;
+	width: 200px;
+	min-height: 120px;
+	border-top: 15px solid #f49c2a;
+	box-shadow: 1px 2px 4px #ccc;
+	text-align: center;
+	padding: 20px 10px 10px 10px;
+}
+
+.card .word{
+	font-weight: bold;
+	font-size: 16px;
+}
+
+.card .definition{
+	font-size: 14px;
+}

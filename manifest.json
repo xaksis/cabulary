@@ -1,0 +1,32 @@
+{
+  "manifest_version": 2,
+  "name": "Cabulary",
+  "version": "1.0",
+  "description": "Chrome extension allows creating vocab cards",
+
+  "browser_action": {
+    "default_icon": "imgs/icon48.png",
+    "default_popup": "popup.html"
+  },
+  
+  "icons": {
+    "32": "imgs/icon32.png",
+    "48": "imgs/icon48.png",
+    "64": "imgs/icon64.png",
+    "128": "imgs/icon128.png"
+  },
+
+  "permissions": [
+  	"storage",
+  	"contextMenus",
+  	"notifications",
+  	"http://www.dictionaryapi.com/"
+  ],
+
+  "background": {
+        "page":"background.html",
+        "persistent": true
+    },
+
+  "author": "xaksis"
+}
