@@ -1,4 +1,61 @@
-.card{
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+.card {
+	perspective: 1000;
+	margin-top: 10px;
+}
+
+.card:hover .flipper, .card.hover .flipper {
+	transform: rotateY(180deg);
+}
+
+.card, .front, .back {
+	width: 180px;
+	min-height: 100px;
+}
+
+/* flip speed goes here */
+.flipper {
+	transition: 0.6s;
+	transform-style: preserve-3d;
+	position: relative;
+}
+
+/* hide back of pane during swap */
+.front, .back {
+	backface-visibility: hidden;
+	position: absolute;
+	top: 0;
+	left: 0;
+	padding: 10px;
+	border-radius: 3px;
+}
+
+/* front pane, placed above back */
+.front {
+	background-color: #f2e394;
+	text-align: center;
+	padding-top: 20px;
+	z-index: 2;
+	/* for firefox 31 */
+	transform: rotateY(0deg);
+
+}
+
+/* back, initially hidden pane */
+.back {
+	background-color: #d96459;
+	transform: rotateY(180deg);
+}
+
+
+/*.card{
 	margin: 10px;
 	width: 200px;
 	min-height: 120px;
@@ -6,7 +63,7 @@
 	box-shadow: 1px 2px 4px #ccc;
 	text-align: center;
 	padding: 20px 10px 10px 10px;
-}
+}*/
 
 .card .word{
 	font-weight: bold;

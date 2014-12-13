@@ -1,8 +1,11 @@
 /******************************************************
 Cabulary Chrome Extension
 Author: xaksis
+about: takes care of bulk of our business logic. We will
+use IndexedDB as our main storage but we'll also use chrome
+storage sync to keep the words in case we ever need to get
+them back or sync across
 *******************************************************/
-
 
 /* Notification module
 *******************************************************/
@@ -29,6 +32,8 @@ var notify_m = (function(){
 /* Module to store the word in chrome storage
 *******************************************************/
 var store_m = (function(){
+	var word_url = "";
+
 
 	function _doesWordExist(word){
 		chrome.storage.sync.get(word, function(obj){
@@ -50,28 +55,40 @@ var store_m = (function(){
 		entry_obj.def = def_xml.text();
 		entry_obj.sentence = def_xml.find("vi").text();
 		console.log(entry_obj);
-		var return_obj = {};
-		return_obj[entry_obj.word] = entry_obj;
-		return return_obj;
+		return entry_obj;
 	}
 
 	function _saveWord(xml){
 		var word_obj = _extractWord(xml);
+		//add the url as well
+		word_obj.url = word_url;
+		//create an object to store in chrome sync
+		var storage_word = {};
+		storage_word[word_obj.word] = "y";
+
 		//check if this word form exists already
-		chrome.storage.sync.get(Object.keys(word_obj)[0], function(obj){
+		chrome.storage.sync.get(word_obj.word, function(obj){
 			if(!$.isEmptyObject(obj)){
+				//word already exist no need to add
 				console.log("word form already exists!", obj);
-				notify_m.notify("Cabulary Notification", "\""+Object.keys(word_obj)[0]+"\" already exists in your deck");
+				notify_m.notify("Cabulary Notification", "\""+word_obj.word+"\" already exists in your deck");
 			}else{
-				chrome.storage.sync.set(word_obj, function(){
-					notify_m.notify("Cabulary Notification", "\""+Object.keys(word_obj)[0]+"\" saved to deck");
-					console.log("word saved!");
+				//add the word only to sync
+				chrome.storage.sync.set(storage_word, function(){
+					//add the word object to indexed db
+					db_m.addWord(word_obj, function(){
+						notify_m.notify("Cabulary Notification", "\""+Object.keys(word_obj)[0]+"\" saved to deck");
+						console.log("word saved!");
+					});
 				});
 			}
 		});
+
+		
 	}
 
-	function _addWord(word){
+	function _addWord(word, page_url){
+		word_url = page_url;
 		chrome.storage.sync.get(word, function(obj){
 			if(!$.isEmptyObject(obj)){
 				console.log("word already exists!", obj);
@@ -97,16 +114,21 @@ var store_m = (function(){
 
 
 var context_m = (function(){
-	
+
 	function getword(info,tab) {
 	    console.log("Word " + info.selectionText + " was clicked.");
 	    // chrome.tabs.create({ 
 	    //     url: "http://www.google.com/search?q=" + info.selectionText,
 	    // });
-		store_m.addWord(info.selectionText);
+		
+		store_m.addWord(info.selectionText, info.pageUrl);
 	}
 
 	function initialize(){
+		//make sure we can open db
+		db_m.open(function(){
+			console.log("db open successful!");	
+		});
 		chrome.contextMenus.create({
 		    title: "Add \"%s\" to Cabulary", 
 		    contexts:["selection"], 
