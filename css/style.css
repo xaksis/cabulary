@@ -8,7 +8,7 @@ html {
 
 .card {
 	perspective: 1000;
-	margin-top: 10px;
+	margin-top: 0px;
 }
 
 .card:hover .flipper, .card.hover .flipper {
@@ -72,4 +72,108 @@ html {
 
 .card .definition{
 	font-size: 14px;
+}
+
+
+/*font specific styles*/
+@font-face {
+	font-family: 'icomoon';
+	src:url('../fonts/icomoon.eot?-xmvf88');
+	src:url('../fonts/icomoon.eot?#iefix-xmvf88') format('embedded-opentype'),
+		url('../fonts/icomoon.woff?-xmvf88') format('woff'),
+		url('../fonts/icomoon.ttf?-xmvf88') format('truetype'),
+		url('../fonts/icomoon.svg?-xmvf88#icomoon') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+	font-family: 'icomoon';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.icon-link:before {
+	content: "\e600";
+}
+.icon-close:before {
+	content: "\e601";
+}
+
+.action-icon{
+	font-size: 10px;
+	color: #ddd;
+	text-decoration: none;
+}
+
+.action-icon:hover{
+	color: #666;
+	text-decoration: none;
+}
+
+.action-icon.link{
+	float: left;
+}
+
+.action-icon.delete{
+	float: right;
+}
+
+.action-bar{
+	margin-top: 10px;
+	padding: 0px 5px 0px 5px;
+}
+
+.action-bar:after {
+  content:"";
+  display:table;
+  clear:both;
+}
+
+.page-bar{
+	margin: 10px 0px 10px 0px;
+	padding: 0px 5px 0px 5px;
+}
+
+.page-bar:after {
+  content:"";
+  display:table;
+  clear:both;
+}
+
+.page-link{
+	text-decoration: none;
+	color: #d96459;
+	font-weight: bold;
+}
+
+.page-link.disabled{
+	color: #ccc;
+	cursor: default;
+}
+
+.page-link.disabled:hover{
+	color: #ccc;
+	cursor: default;
+}
+
+.page-link:hover{
+	text-decoration: none;
+	color: #8c4646;
+}
+
+.page-link.prev{
+	float: left;
+}
+
+.page-link.next{
+	float: right;
 }

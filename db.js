@@ -58,16 +58,21 @@ var db_m = (function(){
 
 	};
 
+	function advanceCursor(num, cursorRequest){
+
+	}
+
 	/**
 	 * Fetch all of the words in the datastore.
 	 */
-	tDB.fetchWords = function(callback) {
+	tDB.fetchWords = function(page_no, count_pp, callback) {
 	  var db = datastore;
+	  var advanced = false;
 	  var transaction = db.transaction([db_store], 'readwrite');
 	  var objStore = transaction.objectStore(db_store);
 
 	  var keyRange = IDBKeyRange.lowerBound(0);
-	  var cursorRequest = objStore.openCursor(keyRange);
+	  var cursorRequest = objStore.openCursor(keyRange, "prev");
 
 	  var words = [];
 
@@ -78,14 +83,24 @@ var db_m = (function(){
 
 	  cursorRequest.onsuccess = function(e) {
 	    var result = e.target.result;
+	    var counter = 0;
 
-	    if (!!result == false) {
+	    if (!!result == false || words.length >= count_pp) {
 	      return;
 	    }
 
-	    words.push(result.value);
+	    if(!advanced && page_no > 0){
+	    	console.log("advancing...", page_no*count_pp);
+	    	result.advance((page_no*count_pp)-1);
+	    	advanced = true;
+	    }else{
 
-	    result.continue();
+	    	console.log(result.value);
+
+		    words.push(result.value);
+
+		    result.continue();
+	    }
 	  };
 
 	  cursorRequest.onerror = tDB.onerror;
@@ -126,12 +141,12 @@ var db_m = (function(){
 	/**
 	 * Delete a word item. word is the string word
 	 */
-	tDB.deleteWord = function(word, callback) {
+	tDB.deleteWord = function(key, callback) {
 	  var db = datastore;
 	  var transaction = db.transaction([db_store], 'readwrite');
 	  var objStore = transaction.objectStore(db_store);
 
-	  var request = objStore.delete(word);
+	  var request = objStore.delete(key);
 
 	  request.onsuccess = function(e) {
 	    callback();
