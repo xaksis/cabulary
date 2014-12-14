@@ -58,9 +58,19 @@ var db_m = (function(){
 
 	};
 
-	function advanceCursor(num, cursorRequest){
+	tDB.total = function(callback){
+	  // Get a reference to the db.
+	  var db = datastore;
 
-	}
+	  // Initiate a new transaction.
+	  var objStore = db.transaction([db_store], 'readwrite').objectStore(db_store);
+	  
+	  var count = objStore.count();
+	  
+	  count.onsuccess = function(){
+	  	callback(count.result);
+	  };
+	};
 
 	/**
 	 * Fetch all of the words in the datastore.
@@ -91,14 +101,13 @@ var db_m = (function(){
 
 	    if(!advanced && page_no > 0){
 	    	console.log("advancing...", page_no*count_pp);
-	    	result.advance((page_no*count_pp)-1);
+	    	result.advance((page_no*count_pp));
 	    	advanced = true;
 	    }else{
 
 	    	console.log(result.value);
 
 		    words.push(result.value);
-
 		    result.continue();
 	    }
 	  };

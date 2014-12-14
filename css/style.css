@@ -15,9 +15,18 @@ html {
 	transform: rotateY(180deg);
 }
 
-.card, .front, .back {
+.card, .front, .back{
 	width: 180px;
 	min-height: 100px;
+}
+
+.front, .back{
+	transition: opacity 0.3s;
+	opacity: 0;
+}
+
+.fullsize {
+	opacity: 1;
 }
 
 /* flip speed goes here */
