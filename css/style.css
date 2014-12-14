@@ -167,6 +167,7 @@ html {
 .page-link.disabled{
 	color: #ccc;
 	cursor: default;
+	display: none;
 }
 
 .page-link.disabled:hover{
@@ -185,4 +186,10 @@ html {
 
 .page-link.next{
 	float: right;
+}
+
+.blank-state{
+	display: block;
+	width: 200px;
+	height: 100px;
 }
