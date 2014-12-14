@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "Cabulary",
   "version": "1.0",
-  "description": "Chrome extension allows creating vocab cards",
+  "description": "Cabulary allows you to create flashcards of words you look up so you can refer to them whenever you want.",
 
   "browser_action": {
     "default_icon": "imgs/icon48.png",
