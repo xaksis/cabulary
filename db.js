@@ -158,6 +158,7 @@ var db_m = (function(){
 	  var request = objStore.delete(key);
 
 	  request.onsuccess = function(e) {
+	  	console.log(e);
 	    callback();
 	  }
 

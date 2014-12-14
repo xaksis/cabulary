@@ -37,10 +37,13 @@
     }
 
     function deleteCard(){
-      var key = parseInt($(this).parent().attr("id"));
-      console.log(key);
+      var parent = $(this).parent();
+      var key = parseInt(parent.attr("id"));
       db_m.deleteWord(key, function(){
-        refreshCards();
+        var deleted_word = parent.next(".card").find(".word").text();
+        chrome.storage.sync.remove(deleted_word, function(){
+          refreshCards();
+        });
       });
       return false;
     }
@@ -57,10 +60,13 @@
         total = count;
         paging_m.init();
       }); 
-      //refresh the cards
-      cards.html("");
       console.log("Page Number: ", page);
       db_m.fetchWords(page, page_count, function(words){
+        if(!words.length)
+          return;
+        
+        //refresh the cards
+        cards.html("");
         for(var i = 0; i < words.length; i++){
           console.log(words[i]);
           cards.append(getCard(words[i]));
