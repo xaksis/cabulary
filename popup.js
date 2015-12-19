@@ -60,7 +60,7 @@
         total = count;
         paging_m.init();
       }); 
-      console.log("Page Number: ", page);
+      //console.log("Page Number: ", page);
       db_m.fetchWords(page, page_count, function(words){
         if(!words.length)
           return;
@@ -68,7 +68,7 @@
         //refresh the cards
         cards.html("");
         for(var i = 0; i < words.length; i++){
-          console.log(words[i]);
+          //console.log(words[i]);
           cards.append(getCard(words[i]));
         }
         $(".front").each(function(){
@@ -110,7 +110,7 @@
       }
 
       function initialize(){
-        console.log("Page: ", page, " total: ", total );
+        //console.log("Page: ", page, " total: ", total );
         if((page+1)*page_count >= total){
           next_link.addClass("disabled")
           next_link.off('click', getNextPage);

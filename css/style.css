@@ -193,3 +193,56 @@ html {
 	width: 200px;
 	height: 100px;
 }
+
+/* dialog styles */
+.option-row{
+	padding: 20px;
+	cursor: pointer;
+}
+
+.option-row:hover{
+	background-color: rgba(212, 77, 65, 0.05);
+}
+
+.option-row.active{
+	background-color: rgba(212, 77, 65, 0.15);
+}
+
+.option-word{
+	font-weight: bold;
+	display: inline-block;
+	margin-right: 15px;
+}
+
+.option-speech{
+	display: inline-block;
+	color: #888;
+}
+
+.option-meaning{
+	display: block;
+}
+
+.btn-holder{
+	text-align: right;
+	margin-top: 15px;
+}
+
+.btn{
+	padding: 10px 15px;
+	border-radius: 2px;
+	border: 0px;
+	display: inline-block;
+}
+
+.btn-default{
+	background-color: #ddd;
+	color: #444;
+	margin-right: 30px;
+}
+
+.btn-primary{
+	background-color: rgba(212, 77, 65, 1.0);
+	color: white;
+	margin-right: 10px;
+}

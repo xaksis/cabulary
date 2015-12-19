@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Cabulary",
-  "version": "1.0",
+  "version": "1.2",
   "description": "Create vocabulary flashcards of words you encounter while reading or surfing the web.",
 
   "browser_action": {
@@ -20,6 +20,7 @@
   },
 
   "permissions": [
+     "tabs",
   	"storage",
   	"contextMenus",
   	"notifications",
