@@ -6,12 +6,6 @@
     var page_count = 4;
     var total = 0;
 
-    function formatDefinition(def){
-      def = def.substring(1, def.length); 
-      def = def.replace(":", "<br/>");
-      return def;
-    }
-
     function getActionHeader(item){
       return '<div class="action-bar" id="'+item.created_at+'">'
         + '<a href="'+item.url+'" title="Page where this word was found." class="action-icon link"><i class="icon-link"></i></a>'
@@ -26,10 +20,10 @@
       +'  <div class="front">'
       +'    <div class="word">'+item.word+'</div>'
       + '   <div class="pos">'+item.pos+'</div>'
-      +'    <div class="pronun">('+item.pronun+')</div>'
+      +'    <div class="pronun">'+item.pronun+'</div>'
       +'  </div>'
       +'  <div class="back">'
-      +'    <div class="definition">'+formatDefinition(item.def)+'</div>'
+      +'    <div class="definition">'+item.def+'</div>'
       +'  </div>'
       +'</div>'
     +'</div>';

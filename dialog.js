@@ -1,5 +1,6 @@
 (function($){
 	var defs;
+	console.log("creating dialog now...", new Date());
 
 	function getOptionRow(word){
     	return '<div class="option-row">'
@@ -10,7 +11,8 @@
     }
 
 	chrome.runtime.onMessage.addListener(function (msg, sender) {
-  // First, validate the message's structure
+		console.log("receiving message...");
+  	// First, validate the message's structure
 	  if ((msg.from === 'background') && (msg.subject === 'definitions')) {
 	    // display all definitions
 	   defs = JSON.parse(msg.data);
@@ -44,8 +46,9 @@
 			  from:    'dialog',
 			  subject: 'definition',
 			  data: JSON.stringify(defs[index])
+			}, function () {
+				window.close();
 			});
-			window.close();
 		}
 	})
 	

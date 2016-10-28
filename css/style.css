@@ -8,7 +8,7 @@ html {
 
 .card {
 	perspective: 1000;
-	margin-top: 0px;
+	margin-top: 5px;
 }
 
 .card:hover .flipper, .card.hover .flipper {
@@ -49,6 +49,7 @@ html {
 /* front pane, placed above back */
 .front {
 	background-color: #f2e394;
+	color:  #4b4537;
 	text-align: center;
 	padding-top: 20px;
 	z-index: 2;
@@ -61,6 +62,7 @@ html {
 .back {
 	background-color: #d96459;
 	transform: rotateY(180deg);
+	box-shadow: 0px 0px 2px #888;
 }
 
 
@@ -130,6 +132,7 @@ html {
 
 .action-icon.link{
 	float: left;
+	color:  #0ca7c6;
 }
 
 .action-icon.delete{
@@ -137,7 +140,7 @@ html {
 }
 
 .action-bar{
-	margin-top: 10px;
+	margin-top: 15px;
 	padding: 0px 5px 0px 5px;
 }
 
@@ -195,9 +198,16 @@ html {
 }
 
 /* dialog styles */
+.definition-header{
+	margin-left: 15px;
+    color: #444748;
+}
+
 .option-row{
 	padding: 20px;
 	cursor: pointer;
+	color: #444748;
+	border-bottom: 1px solid #e8eaec;
 }
 
 .option-row:hover{
