@@ -192,9 +192,14 @@ html {
 }
 
 .blank-state{
-	display: block;
 	width: 200px;
 	height: 100px;
+	color:  #588EBC;
+	background-color: #E6EFFB;
+	border:  1px solid #588EBC;
+	margin:  16px;
+	padding:  16px;
+	text-align: center;
 }
 
 /* dialog styles */
@@ -255,4 +260,19 @@ html {
 	background-color: rgba(212, 77, 65, 1.0);
 	color: white;
 	margin-right: 10px;
+}
+
+.instruction{
+	margin:  16px;
+	border:  1px solid #CF5A5A;
+	background-color: #FBE6E6;
+	text-align: center;
+	padding:  16px;
+	color:  #CF5A5A;
+}
+
+.loading-message{
+	text-align: center;
+	padding:  16px;
+	color:  #888;
 }

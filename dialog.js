@@ -1,6 +1,7 @@
 (function($){
 	var defs;
 	console.log("creating dialog now...", new Date());
+	$(".instruction").hide();
 
 	function getOptionRow(word){
     	return '<div class="option-row">'
@@ -17,6 +18,8 @@
 	    // display all definitions
 	   defs = JSON.parse(msg.data);
 	   console.log(defs); 
+	    // remove loading message
+	    $(".loading-message").hide();
 	    var optionDom = $(".options");
 	    optionDom.html("");
 	    defs.forEach(function(v,i){
@@ -49,6 +52,9 @@
 			}, function () {
 				window.close();
 			});
+		}else{
+			//show instruction here
+			$(".instruction").show();
 		}
 	})
 	
