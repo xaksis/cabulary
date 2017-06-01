@@ -1,9 +1,15 @@
-html {
+html, body {
   box-sizing: border-box;
 }
 
 *, *:before, *:after {
   box-sizing: inherit;
+}
+
+.cards{
+	position:  relative;
+	max-width: 200px;
+	min-height: 120px;
 }
 
 .card {
@@ -31,7 +37,7 @@ html {
 
 /* flip speed goes here */
 .flipper {
-	transition: 0.6s;
+	transition: transform 0.6s;
 	transform-style: preserve-3d;
 	position: relative;
 }
@@ -192,12 +198,12 @@ html {
 }
 
 .blank-state{
-	width: 200px;
+	width: 180px;
 	height: 100px;
 	color:  #588EBC;
 	background-color: #E6EFFB;
 	border:  1px solid #588EBC;
-	margin:  16px;
+	margin:  10px 0px;
 	padding:  16px;
 	text-align: center;
 }
@@ -276,3 +282,19 @@ html {
 	padding:  16px;
 	color:  #888;
 }
+
+.rrequest{
+	border-bottom:  1px solid #e8eaec;
+	padding:  0px 10px 10px 10px;
+	color:  #8bc34a;
+	margin-left:  -10px;
+	margin-right:  -10px;
+}
+.rrequest a{
+	text-decoration: none;
+	font-weight: bold;
+	color:  #8bc34a;
+	display: inline-block;
+}
+
+.rrequest a:focus { outline: 0; }

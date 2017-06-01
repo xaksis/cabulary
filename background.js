@@ -20,7 +20,9 @@ var notify_m = (function(){
 		    priority: 1,
 		    iconUrl:'imgs/icon128.png'
 		}
-		chrome.notifications.create(name, opt, function(id) { console.log("Last error:", chrome.runtime.lastError); });
+		chrome.notifications.create(name, opt, function(id) { 
+			console.log("Last error:", chrome.runtime.lastError); 
+		});
 	}
 
 	return {

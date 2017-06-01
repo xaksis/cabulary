@@ -11,12 +11,18 @@ var db_m = (function(){
 	var db_store = "words";
 	var tDB = {};
 	var datastore = null;
+	var busy = false;
 
 	tDB.onerror = function(event){
 		console.error("IndexedDB Error: ", event.message);
+		busy = false;
 	}
 
 	tDB.open = function (callback){
+		if (busy) return;
+
+		busy = true;
+
 		//Database verison
 		var version = 1;
 
@@ -46,6 +52,8 @@ var db_m = (function(){
 
 		// Handle successful datastore access.
 		  request.onsuccess = function(e) {
+		  	// not busy anymore
+		  	busy = false;
 		    // Get a reference to the DB.
 		    datastore = e.target.result;
 

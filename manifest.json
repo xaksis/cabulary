@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Cabulary - Vocabulary Flashcards",
-  "version": "1.4.3",
+  "version": "1.4.4",
   "description": "Create vocabulary flashcards of words you encounter while reading or surfing the web.",
 
   "browser_action": {

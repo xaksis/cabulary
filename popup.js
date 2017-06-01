@@ -8,7 +8,7 @@
 
     function getActionHeader(item){
       return '<div class="action-bar" id="'+item.created_at+'">'
-        + '<a href="'+item.url+'" title="Page where this word was found." class="action-icon link"><i class="icon-link"></i></a>'
+        + '<a href="'+item.url+'" title="Page where this word was found." class="action-icon link"><i class="icon-link"></i> Link</a>'
         + '<a href="#" title="Delete this card" class="action-icon delete"><i class="icon-close"></i></a>'
         + '</div>';
     }
@@ -30,12 +30,27 @@
        return domStr;
     }
 
+    function getBlankState() {
+        var domStr = '<div class="blank-state">'
+        +   '<strong>No flash cards yet.</strong> </br>'
+        +   '<p>Highlight a word on any page and right click to add a flash card.</p>'
+        + '</div>';
+        return domStr;
+    }
+
+    function setBlankState() {
+      cards.html(getBlankState());
+    }
+
     function deleteCard(){
+      console.log('calling delete');
       var parent = $(this).parent();
       var key = parseInt(parent.attr("id"));
       db_m.deleteWord(key, function(){
+        console.log('calling delete word from db');
         var deleted_word = parent.next(".card").find(".word").text();
         chrome.storage.sync.remove(deleted_word, function(){
+          console.log('calling refresh');
           refreshCards();
         });
       });
@@ -54,10 +69,13 @@
         total = count;
         paging_m.init();
       }); 
-      //console.log("Page Number: ", page);
-      db_m.fetchWords(page, page_count, function(words){
-        if(!words.length)
+
+      db_m.fetchWords(page, page_count, function (words) {
+        if(!words.length) {
+          //reset to initial screen
+          setBlankState();
           return;
+        }
         
         //refresh the cards
         cards.html("");
@@ -129,6 +147,11 @@
 
     /* paging functionaity */
     
+    // chrome extension link
+    $('#cabulary-link').on('click', function (){
+       chrome.tabs.create({url: $(this).attr('href')});
+       return false;
+    });
 
   });
 })(jQuery)
