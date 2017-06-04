@@ -3,7 +3,7 @@
 
     var cards = $("#cards");
     var page = 0;
-    var page_count = 4;
+    var page_count = 3;
     var total = 0;
 
     function getActionHeader(item){
@@ -151,6 +151,22 @@
     $('#cabulary-link').on('click', function (){
        chrome.tabs.create({url: $(this).attr('href')});
        return false;
+    });
+
+    $('.word-entry').keypress(function (e) {
+      var _this = this;
+      var key = e.keyCode || e.which;
+      if(key == 13)  // the enter key code
+      {
+        console.log(e);
+        console.log('sending message');
+        chrome.runtime.sendMessage({
+          from:    'popup',
+          subject: 'definition',
+          data: $(_this).val(),
+        }, function () {});
+        return false;  
+      }
     });
 
   });

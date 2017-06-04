@@ -40,6 +40,12 @@ chrome.runtime.onMessage.addListener(function (msg, sender) {
   	console.log(selected_word); 
   	//add this word
   	store_m.saveWord(selected_word);
+  	return;
+  }
+  if ((msg.from === 'popup') && (msg.subject === 'definition')) {
+  	console.log('got message from popup');
+  	store_m.addWord(msg.data, undefined);
+  	return;
   }
 });
 
@@ -120,7 +126,7 @@ var store_m = (function(){
 	function _getWordObject(definition, pronunciation){
 		return {
 			word: definition.word,
-			pronun: pronunciation[0].raw,
+			pronun: pronunciation[0] ? pronunciation[0].raw : '',
 			pos: definition.partOfSpeech,
 			def: definition.text,
 			sentence: ""
@@ -175,7 +181,8 @@ var store_m = (function(){
 var context_m = (function(){
 
 	function getword(info,tab) {
-	    var text = info.selectionText.split(" ")[0];
+	  var text = info.selectionText.split(" ")[0];
+	  console.log(text);
 		store_m.addWord(text, info.pageUrl);
 	}
 
